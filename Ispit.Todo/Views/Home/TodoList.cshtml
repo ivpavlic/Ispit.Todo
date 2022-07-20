@@ -1,0 +1,30 @@
+﻿@using Ispit.Todo.Models.ViewModel
+@model List<TodoListViewModel>
+@{
+    int counter = 1;
+}
+<h1>TooDo List</h1>
+<p>
+    <a class="btn btn-primary" href="@Url.Action("AddTodoList", "Home")">New ToDo List</a>
+</p>
+<table class="table table-striped table-hover">
+       <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var todoList in Model)
+        {
+            <tr>
+                <th scope="row">@counter</th>
+                <td>@todoList.Name</td>
+                <td>@todoList.Description</td>
+                <td> @Html.ActionLink("Detalji", "Task", new {  id=todoList.Id  },new {@class= "btn btn-secondary"})</td>
+            </tr>
+            counter++;
+        }
+    </tbody>
+</table>

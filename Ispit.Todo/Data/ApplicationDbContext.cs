@@ -3,6 +3,7 @@ using Ispit.Todo.Models.Dbo.Base;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Ispit.Todo.Models.ViewModel;
 
 namespace Ispit.Todo.Data
 {
@@ -111,6 +112,8 @@ namespace Ispit.Todo.Data
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<TodoList> TodoList { get; set; }
         public DbSet<TaskData> Task { get; set; }
+        public DbSet<Ispit.Todo.Models.ViewModel.TodoListViewModel>? TodoListViewModel { get; set; }
+        public DbSet<Ispit.Todo.Models.ViewModel.TaskViewModel>? TaskViewModel { get; set; }
 
     }
 }

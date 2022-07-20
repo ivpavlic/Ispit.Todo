@@ -1,5 +1,7 @@
 using Ispit.Todo.Data;
 using Ispit.Todo.Models.Dbo;
+using Ispit.Todo.Services.Implementation;
+using Ispit.Todo.Services.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +17,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ITodoListService, TodoListService>();
 
 var app = builder.Build();
 

@@ -6,5 +6,7 @@ namespace Ispit.Todo.Models.Dbo
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+
+        public ICollection<TodoList> TodoLists { get; set; }
     }
 }

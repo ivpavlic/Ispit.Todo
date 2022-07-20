@@ -1,0 +1,57 @@
+﻿@using Ispit.Todo.Services.Interface
+@model Ispit.Todo.Models.Binding.TodoListBinding
+@inject ITodoListService todoListService
+@{
+    ViewData["Title"] = "AddTodoList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var user = await todoListService.GetApplicationUsersAsync();
+}
+<h1>New TooDo</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTodoList">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @* @Html.LabelFor(x=>x.Description, new{@class = "control-label"} )*@
+                <label asp-for="Description" class="control-label"></label>
+                @*      @Html.TextBoxFor(x=>x.Description, new{@class = "control-label"})*@
+                <input asp-for="Description" class="form-control" />
+                @*  @Html.ValidationMessageFor(x=>x.Description,"Obavezan unos!", new {@class = "text-danger"} )*@
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label">Choose person</label>
+                <select name="UserId" class="form-select" aria-label="Default select example">
+                    @foreach (var item in user)
+                    {
+                        <option value="@item.Id">@item.Firstname @item.Lastname</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="TodoList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
